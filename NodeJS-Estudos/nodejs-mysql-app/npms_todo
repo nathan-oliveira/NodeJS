@@ -1,0 +1,8 @@
+https://www.youtube.com/watch?v=qJ5R9WTW0_E&feature=youtu.be
+2:56:37
+
+sudo npm init --save
+sudo npm i express express-handlebars express-session mysql express-mysql-session morgan bcryptjs passport passport-local timeago.js connect-flash express-validator
+
+sudo npm i nodemon -D
+npm run dev

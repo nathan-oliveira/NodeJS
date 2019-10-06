@@ -1,0 +1,64 @@
+<% include partials/_header %>
+
+<!-- 
+    pega os dados do banco 
+    <pre><%= data[0].address %></pre> 
+
+    identifica o ID no banco
+    <pre><%= data[0].id %></pre> 
+-->
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>nº</th>
+                        <th>Nome</th>
+                        <th>Cidade</th>
+                        <th>Telefone</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data) { %>
+                        <% for(var i = 0; i < data.length; i++) { %>
+                            <tr>
+                                <td><%= (i + 1) %></td>
+                                <td><%= data[i].name %></td>
+                                <td><%= data[i].address %></td>
+                                <td><%= data[i].phone %></td>
+                                <td>
+                                    <a href="/delete/<%= data[i].id %>" class="btn btn-danger btn-sm">Remover</a>
+                                    <a href="/update/<%= data[i].id %>" class="btn btn-info btn-sm">Editar</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="name" placeholder="Nome">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="address" placeholder="Cidade">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="phone" placeholder="Telefone">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Cliente</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include partials/_footer %>
