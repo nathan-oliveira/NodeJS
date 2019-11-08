@@ -1,3 +1,5 @@
+const lineReader = require('line-reader');
+
 const express = require('express');
 const path = require('path');
 const multer = require('multer');
@@ -23,9 +25,9 @@ const storage = multer.diskStorage({
 app.use(multer({
     storage: storage,
     dest: path.join(__dirname,'public/uploads'),
-    limits: {fileSize: 2000000}, //2mb = 4.000.000
+    limits: {fileSize: 2*1024*1024},
     fileFilter: function(req, file, cb) {
-        const filetypes = /jpeg|jpg|png|gif/;
+        const filetypes = /csv/;
         const mimetype = filetypes.test(file.mimetype);
         const extname = filetypes.test(path.extname(file.originalname));
         if(mimetype && extname) {
@@ -41,6 +43,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 // routes
 app.use(require('./routes/index.routes'));
 
+lineReader.eachLine('public/uploads/6cbe95d2-bca2-4e9c-86de-79499730166d.csv', function (line, last) {
+    var colunas = line.split(',')
+    var nome = colunas[0]
+    var data = colunas[1]
+    var tipo = colunas[2]
+
+})
 
 // Start the server
 app.listen(app.get('port'), function() {
